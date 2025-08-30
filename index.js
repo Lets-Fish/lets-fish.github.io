@@ -1,9 +1,21 @@
 const scoreboard = document.getElementById("score");
-var score = 0;
+var gamedata={
+    score:0,
+}
+loadGame();
+setInterval(loadGame(),5000);
+
 function updateScore(){
-    scoreboard.innerText = "Score: "+score;
+    scoreboard.innerText = "Score: "+gamedata.score;
 }
 function increaseScore(){
-    score++;
+    gamedata.score++;
     updateScore();
+}
+function saveGame(){
+    const str = JSON.stringify(gamedata);
+    localStorage.setItem("gamedata",str);
+}
+function loadGame(){
+    gamedata = JSON.parse(localStorage.getItem("gamedata"))??gamedata;
 }
