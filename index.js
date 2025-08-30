@@ -54,7 +54,11 @@ async function evalGrid(gridIndex){
     const canvas = document.getElementById("grid_"+gridIndex);
     for (let i = 0; i < 10; i++) {
         drawPoly(canvas,[0,0],[1,0],[1,1],[0,1],[0,0],[0.5*(i/10),0.5*(i/10)],[1-0.5*(i/10),0.5*(i/10)],[1-0.5*(i/10),1-0.5*(i/10)],[0.5*(i/10),1-0.5*(i/10)]);
+        await sleep(200);
     }
+}
+async function sleep(msec) {
+    return new Promise(resolve => setTimeout(resolve, msec));
 }
 function drawPoly(canvas,...points){
     var ctx = canvas.getContext('2d');
