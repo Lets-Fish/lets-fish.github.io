@@ -3,7 +3,7 @@ var gamedata={
     score:0,
 }
 loadGame();
-setInterval(loadGame(),5000);
+setInterval(saveGame(),5000);
 //{}[]
 //Debug
 function addAfterHtmlID(id,str){
@@ -21,6 +21,7 @@ function addInHtmlID(id,str){
         end = element.outerHTML.indexOf(">");
     }
     const className = element.outerHTML.substring(1,end);
+    console.log(className);
     element.outerHTML=element.outerHTML.substring(0,element.outerHTML.indexOf("</"+className+">"))+str+"</"+className+">";
 }
 function addInHtmlName(name,str){
@@ -47,4 +48,27 @@ function saveGame(){
 function loadGame(){
     gamedata = JSON.parse(localStorage.getItem("gamedata"))??gamedata;
     updateScore();
+}
+async function evalGrid(gridIndex){
+    const canvas = document.getElementById("grid_"+gridIndex);
+    for (let index = 0; index < 10; index++) {
+        drawPoly(canvas,[0,0],[1,0],[1,1],[0,1],[0,0],[0.5*(i/10),0.5*(i/10)],[1-0.5*(i/10),0.5*(i/10)],[1-0.5*(i/10),1-0.5*(i/10)],[0.5*(i/10),1-0.5*(i/10)]);
+    }
+}
+function drawPoly(canvas,...points){
+    var ctx = canvas.getContext('2d');
+    ctx.fillStyle = '#999';
+    
+    ctx.beginPath();
+    for (let i = 0; i < points.length; i++) {
+        const x = points[i][0]*canvas.clientWidth;
+        const y = points[i][0]*canvas.clientHeight;
+        if(i==0){
+            ctx.moveTo(x,y);
+        }else{
+            ctx.lineTo(x,y);
+        }
+    }
+    ctx.closePath();
+    ctx.fill();
 }
