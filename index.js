@@ -51,7 +51,7 @@ function loadGame(){
 }
 async function evalGrid(gridIndex){
     const canvas = document.getElementById("grid_"+gridIndex);
-    for (let index = 0; index < 10; index++) {
+    for (let i = 0; i < 10; i++) {
         drawPoly(canvas,[0,0],[1,0],[1,1],[0,1],[0,0],[0.5*(i/10),0.5*(i/10)],[1-0.5*(i/10),0.5*(i/10)],[1-0.5*(i/10),1-0.5*(i/10)],[0.5*(i/10),1-0.5*(i/10)]);
     }
 }
