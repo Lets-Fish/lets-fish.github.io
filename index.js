@@ -4,15 +4,15 @@ var gamedata={
 }
 loadGame();
 setInterval(loadGame(),5000);
-//{}
+//{}[]
 //Debug
 function addAfterHtmlID(id,str){
     const element = document.getElementById(id);
     element.outerHTML=element.outerHTML+str;
 }
 function addAfterHtmlName(name,str){
-    const element = document.getElementsByClassName(name);
-    element.innerHTML=element.innerHTML+str;
+    const element = document.getElementsByTagName(name)[0];
+    element.outerHTML=element.outerHTML+str;
 }
 function addInHtmlID(id,str){
     const element = document.getElementById(id);
@@ -20,12 +20,17 @@ function addInHtmlID(id,str){
     if(element.outerHTML.indexOf(">")<end){
         end = element.outerHTML.indexOf(">");
     }
-    const className = element.outerHTML.substring(1,element.outerHTML.indexOf(">"));
-    element.innerHTML=element.outerHTML.substring(0,)+str;
+    const className = element.outerHTML.substring(1,end);
+    element.outerHTML=element.outerHTML.substring(0,element.outerHTML.indexOf("</"+className+">"))+str+"</"+className+">";
 }
 function addInHtmlName(name,str){
-    const element = document.getElementsByClassName(name);
-    element.innerHTML=element.innerHTML+str;
+    const element = document.getElementsByTagName(name)[0];
+    var end = element.outerHTML.indexOf(" ");
+    if(element.outerHTML.indexOf(">")<end){
+        end = element.outerHTML.indexOf(">");
+    }
+    const className = element.outerHTML.substring(1,end);
+    element.outerHTML=element.outerHTML.substring(0,element.outerHTML.indexOf("</"+className+">"))+str+"</"+className+">";
 }
 
 function updateScore(){
