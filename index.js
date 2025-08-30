@@ -3,7 +3,7 @@ var gamedata={
     score:0,
 }
 loadGame();
-setInterval(saveGame(),5000);
+setInterval(saveGame,5000);
 //{}[]
 //Debug
 function addAfterHtmlID(id,str){
@@ -58,12 +58,12 @@ async function evalGrid(gridIndex){
 }
 function drawPoly(canvas,...points){
     var ctx = canvas.getContext('2d');
-    ctx.fillStyle = '#999';
+    ctx.fillStyle = '#f00';
     
     ctx.beginPath();
     for (let i = 0; i < points.length; i++) {
         const x = points[i][0]*canvas.clientWidth;
-        const y = points[i][0]*canvas.clientHeight;
+        const y = points[i][1]*canvas.clientHeight;
         if(i==0){
             ctx.moveTo(x,y);
         }else{
