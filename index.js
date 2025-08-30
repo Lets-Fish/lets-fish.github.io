@@ -43,6 +43,7 @@ function increaseScore(){
 }
 function saveGame(){
     const str = JSON.stringify(gamedata);
+    console.log("saved: "+str);
     localStorage.setItem("gamedata",str);
 }
 function loadGame(){
