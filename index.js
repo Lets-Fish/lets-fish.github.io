@@ -1,7 +1,20 @@
 const scoreboard = document.getElementById("score");
 var gamedata={
     score:0,
+    stars:{
+        white_stars:{
+            amount:2,
+            mult:1,
+            add:1,
+        },
+        blue_stars:{
+            amount:1,
+            mult:2,
+            add:0,
+        }
+    }
 }
+var grids=Array.from(Array(1), () => Array.from(Array(10), () => new Array(10)));
 loadGame();
 setInterval(saveGame,5000);
 //{}[]
@@ -52,10 +65,12 @@ function loadGame(){
 }
 async function evalGrid(gridIndex){
     const canvas = document.getElementById("grid_"+gridIndex);
-    for (let i = 0; i < 10; i++) {
+    
+    //Shutter close animation
+    /*for (let i = 0; i < 10; i++) {
         drawPoly(canvas,[0,0],[1,0],[1,1],[0,1],[0,0],[0.5*(i/10),0.5*(i/10)],[1-0.5*(i/10),0.5*(i/10)],[1-0.5*(i/10),1-0.5*(i/10)],[0.5*(i/10),1-0.5*(i/10)]);
         await sleep(200);
-    }
+    }*/
 }
 async function sleep(msec) {
     return new Promise(resolve => setTimeout(resolve, msec));
