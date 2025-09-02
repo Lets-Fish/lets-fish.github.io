@@ -35,7 +35,7 @@ function addInHtmlID(id,str){
     }
     const className = element.outerHTML.substring(1,end);
     console.log(className);
-    element.outerHTML=element.outerHTML.substring(0,element.outerHTML.indexOf("</"+className+">"))+str+"</"+className+">";
+    element.outerHTML=element.outerHTML.substring(0,element.outerHTML.lastindexOf("</"+className+">"))+str+"</"+className+">";
 }
 function addInHtmlName(name,str){
     const element = document.getElementsByTagName(name)[0];
@@ -44,7 +44,7 @@ function addInHtmlName(name,str){
         end = element.outerHTML.indexOf(">");
     }
     const className = element.outerHTML.substring(1,end);
-    element.outerHTML=element.outerHTML.substring(0,element.outerHTML.indexOf("</"+className+">"))+str+"</"+className+">";
+    element.outerHTML=element.outerHTML.substring(0,element.outerHTML.lastindexOf("</"+className+">"))+str+"</"+className+">";
 }
 
 function updateScore(){

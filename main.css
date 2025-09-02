@@ -22,30 +22,29 @@ body
 
 .blue{
     color: lightblue;
-    border-color: lightblue;
+    border-bottom-color: lightblue;
 }
 
 .star{
-  margin: 50px 0;
+  margin: 50% 0;
   position: relative;
   display: block;
-  color: white;
-  width: 0px;
-  height: 0px;
-  border-right: 100px solid transparent;
-  border-bottom: 70px solid white;
-  border-left: 100px solid transparent;
+  width: 05;
+  height: 0%;
+  border-right: 100% solid transparent;
+  border-bottom: 70% solid;
+  border-left: 100% solid transparent;
   transform: rotate(35deg);
 }
 .star:before {
-  border-bottom: 80px solid white;
-  border-left: 30px solid transparent;
-  border-right: 30px solid transparent;
+  border-bottom: 80% solid;
+  border-left: 30% solid transparent;
+  border-right: 30% solid transparent;
   position: absolute;
   height: 0;
   width: 0;
-  top: -45px;
-  left: -65px;
+  top: -45%;
+  left: -65%;
   display: block;
   content: '';
   transform: rotate(-35deg);
@@ -53,14 +52,13 @@ body
 .star:after {
   position: absolute;
   display: block;
-  color: white;
-  top: 3px;
-  left: -105px;
-  width: 0px;
-  height: 0px;
-  border-right: 100px solid transparent;
-  border-bottom: 70px solid white;
-  border-left: 100px solid transparent;
+  top: 3%;
+  left: -105%;
+  width: 0%;
+  height: 0%;
+  border-right: 100% solid transparent;
+  border-bottom: 70% solid;
+  border-left: 100% solid transparent;
   transform: rotate(-70deg);
   content: '';
 }
@@ -68,4 +66,6 @@ body
     display: grid;
     grid-column: repeat(11,10px);
     grid-row: repeat(11,10px);
+    height: 100%;
+    width:100%;
 }
