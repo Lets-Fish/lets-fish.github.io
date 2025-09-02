@@ -64,7 +64,7 @@ function loadGame(){
     updateScore();
 }
 async function evalGrid(gridIndex){
-    const canvas = document.getElementById("grid_"+gridIndex);
+    const canvas = document.getElementById("grid_over_"+gridIndex);
     
     //Shutter close animation
     /*for (let i = 0; i < 10; i++) {

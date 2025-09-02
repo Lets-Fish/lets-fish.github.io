@@ -14,9 +14,15 @@
     <h1>test</h1>  
     <button onclick="increaseScore();">click</button>
     <h3 id="score">Score: </h3>
-    <div id="box">
-      <canvas id="grid_1"></canvas>
+    <div class="outer_box">
+      <div id="box" class="stack">
+        <div id="grid_1" class="grid">
+          <div class="blue star"></div>
+        </div>
+        <canvas id="grid_over_1" class="overlay"></canvas>
+      </div>
     </div>
+    <button onclick="evalGrid(1);">eval</button>
     <script src="index.js"></script>
   </body>
 </html>
