@@ -1,0 +1,73 @@
+﻿body {
+    background: #121213;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.center-screen {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 60vh;
+}
+
+.horsle{
+    border-spacing: 0.5rem 1rem;
+}
+
+.horsle_row{
+}
+
+.guess {
+    border: 0.2rem solid #3a3a3c;
+    width: 3.5rem;
+    height: 3.5rem;
+    text-align: center;
+}
+
+.letter {
+    font-size: 2rem;
+}
+
+.input {
+    font-size: 2rem;
+    background-color: #121213;
+    color: white;
+    border: none;
+    width: 3.5rem;
+    height: 3.5rem;
+}
+
+.right, .wrong, .red, .dark, .missed{
+    border:none;
+    height: 3.7rem;
+}
+
+.right{
+    background-color: #538d4e;
+}
+
+.wrong {
+    background-color: #3a3a3c;
+}
+
+.red {
+    background-color: #ac1313;
+}
+.dark {
+    background-color:black;
+}
+.missed {
+    background-color: #b59f3b;
+}
+
+.projectile {
+    height: 25px;
+    width: 25px;
+    background-color: red;
+    border-radius: 50%;
+    display: inline-block;
+    position:absolute;
+}
