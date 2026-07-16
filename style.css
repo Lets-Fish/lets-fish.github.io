@@ -38,6 +38,11 @@
 
 }
 
+.horse {
+    position: absolute;
+    max-height: 10rem;
+}
+
 .input{
     background-color: #121213;
     color: white;
@@ -49,10 +54,10 @@
 
 .guess_small {
     border: 0.2rem solid #3a3a3c;
-    width: 0.525rem;
-    height: 0.525rem;
+    width: 0.875rem;
+    height: 0.875rem;
     text-align: center;
-    font-size: 0.3rem;
+    font-size: 0.5rem;
 }
 
 .right, .wrong, .red, .dark, .missed,.white{

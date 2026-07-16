@@ -25,6 +25,11 @@ const re_missed = /[Ｈ0Ɍ$Ẹ]/;
 var projs = [];
 var attack = [];
 var darkness = 0;
+var horse;
+
+function rand(f,t){
+    return Math.floor(Math.random()*(t-f+1))+f;
+}
 
 function generateRandomPermutation(n) {
     let permutation = Array
@@ -176,6 +181,10 @@ function pressed(s) {
         submit();
         return;
     }
+    if (s === 'f') {
+        removefrank();
+        return;
+    }
     if (s === 'b') {
         if (guess.length >0) {
             guess = guess.substring(0,guess.length-1)
@@ -241,11 +250,7 @@ async function move() {
         projs[i][2] += dy * mult * 0.1;
         projs[i][1] *= 0.995;
         projs[i][2] *= 0.995;
-        if (x - buffer > w || y - buffer > h || x + buffer < 0 || y + buffer < 0) {
-            projs[i][0].remove();
-            delete projs[i];
-            projs[i] = null;
-        } else if (1 / mult < 10) {
+        if (1 / mult < 15) {
             endGame(false);
         }
     }
@@ -253,6 +258,8 @@ async function move() {
 }
 
 function projectile(x,y) {
+    if(projs.length>50)
+        return;
     var insert = document.createElement('span');
     insert.className = "projectile";
     insert.style.top = x + "px";
@@ -290,19 +297,46 @@ async function desplash(a) {
     if (a > 0)
         setTimeout(desplash, 5, a -1);
 }
-async function frank() {
+async function horse_s() {
     if (over)
         return;
-    var index = Math.floor(Math.random() * guess.length);
-    if (guess.length > 0) {
-        guess = guess.slice(0, index) + guess.slice(index+1, guess.length)
-        setGuess();
+    if(guess.length>0){
+        let ho = document.createElement('img');
+        ho.className = "horse";
+        ho.src = "horse.png";
+        document.body.appendChild(ho);
+        ho.onclick = function () {
+            removeHorse();
+        };
+        ho.style.left = rand(100,w-100)+"px";
+        ho.style.top = rand(100,h-100)+"px";
+        horse = ho;
+        setTimeout(horse_e, Math.round(Math.random()*400)+1000);
+    }else{
+        setTimeout(horse_s, 5000);
     }
-        
-    setTimeout(frank, Math.round(Math.random()*5000)+10000);
+}
+
+function removeHorse(){
+    horse.remove();
+    horse = null;
+}
+
+async function horse_e() {
+    if (over)
+        return;
+    if(horse!=null){
+        var index = Math.floor(Math.random() * guess.length);
+        if (guess.length > 0) {
+            guess = guess.slice(0, index) + guess.slice(index+1, guess.length)
+            setGuess();
+        }
+        removeHorse();
+    }
+    setTimeout(horse_s, Math.round(Math.random()*5000)+10000);
 }
 
 move();
 spawn();
 blind();
-frank();
+setTimeout(horse_s, Math.round(Math.random()*5000)+10000);
