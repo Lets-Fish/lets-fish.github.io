@@ -17,6 +17,12 @@
     border-spacing: 0.5rem 1rem;
 }
 
+.enter {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
 .horsle_row{
 }
 
@@ -25,24 +31,34 @@
     width: 3.5rem;
     height: 3.5rem;
     text-align: center;
+    font-size :2rem;
 }
 
 .letter {
-    font-size: 2rem;
+
 }
 
-.input {
-    font-size: 2rem;
+.input{
     background-color: #121213;
     color: white;
     border: none;
-    width: 3.5rem;
-    height: 3.5rem;
+    width: 100%;
+    height: 100%;
+    font-size:inherit;
 }
 
-.right, .wrong, .red, .dark, .missed{
+.guess_small {
+    border: 0.2rem solid #3a3a3c;
+    width: 0.525rem;
+    height: 0.525rem;
+    text-align: center;
+    font-size: 0.3rem;
+}
+
+.right, .wrong, .red, .dark, .missed,.white{
     border:none;
     height: 3.7rem;
+    font-size:2rem;
 }
 
 .right{
@@ -62,7 +78,12 @@
 .missed {
     background-color: #b59f3b;
 }
-
+.white {
+    background-color: #bfbfd3;
+}
+.small {
+    font-size: 1rem;
+}
 .projectile {
     height: 25px;
     width: 25px;

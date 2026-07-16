@@ -1,6 +1,6 @@
 ﻿// JavaScript source code
 var answer = "";
-const poss = "abcdef";
+const poss = "abcdefg";
 var row = 0;
 var guess = "";
 var guesses = {};
@@ -10,9 +10,9 @@ var over = false;
 do {
     answer = "";
     for (var i = 0; i < 5; i++) {
-        answer += poss[Math.ceil(Math.random() * 5)];
+        answer += poss[Math.ceil(Math.random() * poss.length-1)];
     }
-}while(answer.search("c")==-1)
+}while(answer.search("c")==-1 || answer.split("g").length-1>1)
 
 var mouseX = 0;
 var mouseY = 0;
@@ -25,16 +25,57 @@ const re_missed = /[Ｈ0Ɍ$Ẹ]/;
 var projs = [];
 var attack = [];
 var darkness = 0;
+
+function generateRandomPermutation(n) {
+    let permutation = Array
+        .from({ length: n }, (_, i) => i );
+
+    for (let i = n - 1; i > 0; i--) {
+        const j = Math
+            .floor(Math.random() * (i + 1));
+        [permutation[i], permutation[j]]
+            =
+            [permutation[j], permutation[i]];
+    }
+
+    return permutation;
+}
+
+function guessSize(s) {
+    var name = (s == "small" ? "guess_small" : "guess");
+    let ch = document.getElementById("enter").children;
+    for (var i = 0; i < ch.length; i++) {
+        ch[i].className = name;
+    }
+}
+
+function shuffle() {
+    let ch = document.getElementById("enter").children;
+    let perm = generateRandomPermutation(ch.length);
+    for (var i = 0; i < ch.length; i++) {
+        ch[i].style.order = perm[i];
+    }
+}
+
+function unshuffle() {
+    let ch = document.getElementById("enter").children;
+    for (var i = 0; i < ch.length; i++) {
+        ch[i].style.order = i;
+    }
+}
+
 function submit() {
     if (guess.search(re)==-1) {
         alert("Guess wrong: Must be horse");
         return;
     }
+    guessSize("normal");
     let cycle = 0;
     attack = [];
     darkness = 0;
     let correct = [];
     let ok = true;
+    unshuffle();
     for (var i = 0; i < 5; i++) {
         if (guess[i].search(re_missed) != -1) {
             correct[i] = "missed";
@@ -52,7 +93,8 @@ function submit() {
                 } else {
                     correct[i] = "red";
                     let rect = document.getElementById("row"+row).getBoundingClientRect();
-                    attack.push([rect.top+40,rect.left+22+70*i]);
+                    attack.push([rect.top + 40, rect.left + 22 + 70 * i]);
+                    projectile(rect.top + 40, rect.left + 22 + 70 * i);
                 }
                 break;
             case 'd':
@@ -79,6 +121,17 @@ function submit() {
                 } else {
                     correct[i] = "dark";
                     darkness += 1;
+                }
+                break;
+            case 'g':
+                if (row % 3 == 2) {
+                    correct[i] = "right";
+                } else if (row % 3 == 1) {
+                    correct[i] = "small";
+                    guessSize("small");
+                } else {
+                    correct[i] = "white";
+                    shuffle();
                 }
                 break;
         }
@@ -161,7 +214,7 @@ async function twitch_c(n) {
     if (over)
         return;
     document.getElementById("input" + n).innerText = cursed[n];
-    setTimeout(twitch_n, Math.ceil(Math.random() * 5000 + 500), n);
+    setTimeout(twitch_n, Math.ceil(Math.random() * 1000 + 2000), n);
 }
 
 async function twitch_n(n) {
@@ -199,18 +252,22 @@ async function move() {
     setTimeout(move, 10);
 }
 
+function projectile(x,y) {
+    var insert = document.createElement('span');
+    insert.className = "projectile";
+    insert.style.top = x + "px";
+    insert.style.left = y + "px";
+    document.body.appendChild(insert)
+    projs.push([insert, 0, 0]);
+}
+
 async function spawn() {
     if (over) {
         return;
     }
         
     for (var i = 0; i < attack.length;i++) {
-        var insert = document.createElement('span');
-        insert.className = "projectile";
-        insert.style.top = attack[i][0]+"px";
-        insert.style.left = attack[i][1]+"px";
-        document.body.appendChild(insert)
-        projs.push([insert, 0, 0]);
+        projectile(attack[i][0], attack[i][1]);
     }
     setTimeout(spawn, 5000/Math.max(1,attack.length));
 }
@@ -233,7 +290,19 @@ async function desplash(a) {
     if (a > 0)
         setTimeout(desplash, 5, a -1);
 }
+async function frank() {
+    if (over)
+        return;
+    var index = Math.floor(Math.random() * guess.length);
+    if (guess.length > 0) {
+        guess = guess.slice(0, index) + guess.slice(index+1, guess.length)
+        setGuess();
+    }
+        
+    setTimeout(frank, Math.round(Math.random()*5000)+10000);
+}
 
 move();
 spawn();
 blind();
+frank();
