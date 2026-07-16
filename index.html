@@ -4,73 +4,82 @@
 <head>
     <link rel="stylesheet" href="style.css">
     <meta charset="utf-8" />
-    <title></title>
+    <title>Evil Horsle</title>
+    <meta content="Evil Horsle" property="og:title" />
+    <meta name="description" content="Wordle, but the answer is always horse. You still have to win though">
+    <meta content="Wordle, but the answer is always horse. You still have to win though" property="og:description" />
+    <meta content="https://lets-fish.github.io/" property="og:url" />
+    <!--<meta content="" property="og:image" />-->
 </head>
-<body>
-    <script src="script.js"></script>
-    <span id="blackscreen" style="width: 100%; height: 100%; display: block; background: black; position: absolute; left: 0; top: 0; opacity: 0; pointer-events: none; z-index:1000;"></span>
-    <div class="center-screen">
-        <table class="horsle">
-            <!--<tr class="horsle_row" id="row0">
-    <td class="guess red"><b class="letter">H</b></td>
-    <td class="guess right"><b class="letter">O</b></td>
-    <td class="guess wrong"><b class="letter">R</b></td>
-    <td class="guess dark"><b class="letter">S</b></td>
-    <td class="guess missed"><b class="letter">E</b></td>
-    </tr>-->
-            <tr class="horsle_row" id="row0">
-                <td class="guess"><b class="letter"> </b></td>
-                <td class="guess"><b class="letter"> </b></td>
-                <td class="guess"><b class="letter"> </b></td>
-                <td class="guess"><b class="letter"> </b></td>
-                <td class="guess"><b class="letter"> </b></td>
-            </tr>
-            <tr class="horsle_row" id="row1">
-                <td class="guess"><b class="letter"> </b></td>
-                <td class="guess"><b class="letter"> </b></td>
-                <td class="guess"><b class="letter"> </b></td>
-                <td class="guess"><b class="letter"> </b></td>
-                <td class="guess"><b class="letter"> </b></td>
-            </tr>
-            <tr class="horsle_row" id="row2">
-                <td class="guess"><b class="letter"> </b></td>
-                <td class="guess"><b class="letter"> </b></td>
-                <td class="guess"><b class="letter"> </b></td>
-                <td class="guess"><b class="letter"> </b></td>
-                <td class="guess"><b class="letter"> </b></td>
-            </tr>
-            <tr class="horsle_row" id="row3">
-                <td class="guess"><b class="letter"> </b></td>
-                <td class="guess"><b class="letter"> </b></td>
-                <td class="guess"><b class="letter"> </b></td>
-                <td class="guess"><b class="letter"> </b></td>
-                <td class="guess"><b class="letter"> </b></td>
-            </tr>
-            <tr class="horsle_row" id="row4">
-                <td class="guess"><b class="letter"> </b></td>
-                <td class="guess"><b class="letter"> </b></td>
-                <td class="guess"><b class="letter"> </b></td>
-                <td class="guess"><b class="letter"> </b></td>
-                <td class="guess"><b class="letter"> </b></td>
-            </tr>
-            <tr class="horsle_row" id="row5">
-                <td class="guess"><b class="letter"> </b></td>
-                <td class="guess"><b class="letter"> </b></td>
-                <td class="guess"><b class="letter"> </b></td>
-                <td class="guess"><b class="letter"> </b></td>
-                <td class="guess"><b class="letter"> </b></td>
-            </tr>
-        </table>
-        ------------------------------------------------------------------
-        <div class="enter" id="enter">
-            <div class="guess"><button class="input" id="input0" onclick="pressed(0)">H</button></div>
-            <div class="guess"><button class="input" id="input1" onclick="pressed(1)">O</button></div>
-            <div class="guess"><button class="input" id="input2" onclick="pressed(2)">R</button></div>
-            <div class="guess"><button class="input" id="input3" onclick="pressed(3)">S</button></div>
-            <div class="guess"><button class="input" id="input4" onclick="pressed(4)">E</button></div>
-            <div class="guess"><button class="input" onclick="pressed('b')">⌫</button></div>
-            <div class="guess"><button class="input" onclick="pressed('n')">↵</button></div>
+    <body>
+        <script src="script.js"></script>
+        <span id="blackscreen" style="width: 100%; height: 100%; display: block; background: black; position: absolute; left: 0; top: 0; opacity: 0; pointer-events: none; z-index:1000;"></span>
+        <div class="center-screen">
+            <header>
+                <h1>Evil Horsle</h1>
+                <h2>Wordle, but the answer is always horse.<br> You still have to win though</h2>
+            </header>
+            <table class="horsle">
+                <!--<tr class="horsle_row" id="row0">
+        <td class="guess red"><b class="letter">H</b></td>
+        <td class="guess right"><b class="letter">O</b></td>
+        <td class="guess wrong"><b class="letter">R</b></td>
+        <td class="guess dark"><b class="letter">S</b></td>
+        <td class="guess missed"><b class="letter">E</b></td>
+        </tr>-->
+                <tr class="horsle_row" id="row0">
+                    <td class="guess"><b class="letter"> </b></td>
+                    <td class="guess"><b class="letter"> </b></td>
+                    <td class="guess"><b class="letter"> </b></td>
+                    <td class="guess"><b class="letter"> </b></td>
+                    <td class="guess"><b class="letter"> </b></td>
+                </tr>
+                <tr class="horsle_row" id="row1">
+                    <td class="guess"><b class="letter"> </b></td>
+                    <td class="guess"><b class="letter"> </b></td>
+                    <td class="guess"><b class="letter"> </b></td>
+                    <td class="guess"><b class="letter"> </b></td>
+                    <td class="guess"><b class="letter"> </b></td>
+                </tr>
+                <tr class="horsle_row" id="row2">
+                    <td class="guess"><b class="letter"> </b></td>
+                    <td class="guess"><b class="letter"> </b></td>
+                    <td class="guess"><b class="letter"> </b></td>
+                    <td class="guess"><b class="letter"> </b></td>
+                    <td class="guess"><b class="letter"> </b></td>
+                </tr>
+                <tr class="horsle_row" id="row3">
+                    <td class="guess"><b class="letter"> </b></td>
+                    <td class="guess"><b class="letter"> </b></td>
+                    <td class="guess"><b class="letter"> </b></td>
+                    <td class="guess"><b class="letter"> </b></td>
+                    <td class="guess"><b class="letter"> </b></td>
+                </tr>
+                <tr class="horsle_row" id="row4">
+                    <td class="guess"><b class="letter"> </b></td>
+                    <td class="guess"><b class="letter"> </b></td>
+                    <td class="guess"><b class="letter"> </b></td>
+                    <td class="guess"><b class="letter"> </b></td>
+                    <td class="guess"><b class="letter"> </b></td>
+                </tr>
+                <tr class="horsle_row" id="row5">
+                    <td class="guess"><b class="letter"> </b></td>
+                    <td class="guess"><b class="letter"> </b></td>
+                    <td class="guess"><b class="letter"> </b></td>
+                    <td class="guess"><b class="letter"> </b></td>
+                    <td class="guess"><b class="letter"> </b></td>
+                </tr>
+            </table>
+            ------------------------------------------------------------------
+            <div class="enter" id="enter">
+                <div class="guess"><button class="input" id="input0" onclick="pressed(0)">H</button></div>
+                <div class="guess"><button class="input" id="input1" onclick="pressed(1)">O</button></div>
+                <div class="guess"><button class="input" id="input2" onclick="pressed(2)">R</button></div>
+                <div class="guess"><button class="input" id="input3" onclick="pressed(3)">S</button></div>
+                <div class="guess"><button class="input" id="input4" onclick="pressed(4)">E</button></div>
+                <div class="guess"><button class="input" onclick="pressed('b')">⌫</button></div>
+                <div class="guess"><button class="input" onclick="pressed('n')">↵</button></div>
+            </div>
         </div>
-    </div>
-</body>
+    </body>
 </html>
