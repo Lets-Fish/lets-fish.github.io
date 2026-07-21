@@ -52,6 +52,14 @@
     font-size:inherit;
 }
 
+
+.difficulty {
+    background-color: #121213;
+    color: white;
+    font-size: 1.5rem;
+    margin: 0 1rem 0 1rem;
+}
+
 .guess_small {
     border: 0.2rem solid #3a3a3c;
     width: 0.875rem;

@@ -1,19 +1,21 @@
-﻿// JavaScript source code
-var answer = "";
-const poss = "abcdefg";
+﻿var answer = "";
+var poss = "abcdefg";
 var row = 0;
 var guess = "";
 var guesses = {};
 const cursed = "Ｈ0Ɍ$Ẹ";
 const normal = "HORSE";
 var over = false;
-do {
-    answer = "";
-    for (var i = 0; i < 5; i++) {
-        answer += poss[Math.ceil(Math.random() * poss.length-1)];
-    }
-}while(answer.search("c")==-1 || answer.split("g").length-1>1)
-
+var dif = "normal";
+function setAnswer() {
+    do {
+        answer = "";
+        for (var i = 0; i < 5; i++) {
+            answer += poss[Math.ceil(Math.random() * poss.length - 1)];
+        }
+    } while (answer.search("c") == -1 || answer.split("g").length - 1 > 1)
+}
+setAnswer();
 var mouseX = 0;
 var mouseY = 0;
 onmousemove = function (e) {
@@ -74,13 +76,17 @@ function submit() {
         alert("Guess wrong: Must be horse");
         return;
     }
+    if (row == 0) {
+        document.getElementById("diffdiv").remove();
+    }
     guessSize("normal");
     let cycle = 0;
     attack = [];
     darkness = 0;
     let correct = [];
     let ok = true;
-    unshuffle();
+    if(dif!="hard")
+        unshuffle();
     for (var i = 0; i < 5; i++) {
         if (guess[i].search(re_missed) != -1) {
             correct[i] = "missed";
@@ -245,11 +251,11 @@ async function move() {
         projs[i][0].style.top = y + "px";
         var dx = mouseX - x;
         var dy = mouseY - y;
-        let mult = 1 / Math.sqrt(dx ** 2 + dy ** 2);
+        let mult = projs[i][4] / Math.sqrt(dx ** 2 + dy ** 2);
         projs[i][1] += dx * mult * 0.1;
         projs[i][2] += dy * mult * 0.1;
-        projs[i][1] *= 0.995;
-        projs[i][2] *= 0.995;
+        projs[i][1] *= projs[i][3];
+        projs[i][2] *= projs[i][3];
         if (1 / mult < 15) {
             endGame(false);
         }
@@ -265,7 +271,7 @@ function projectile(x,y) {
     insert.style.top = x + "px";
     insert.style.left = y + "px";
     document.body.appendChild(insert)
-    projs.push([insert, 0, 0]);
+    projs.push([insert, 0, 0, dif == "hard" ? (0.99 + Math.random() * 0.01) : 0.995,dif=="hard"?1+Math.random():1]);
 }
 
 async function spawn() {
@@ -276,7 +282,7 @@ async function spawn() {
     for (var i = 0; i < attack.length;i++) {
         projectile(attack[i][0], attack[i][1]);
     }
-    setTimeout(spawn, 5000/Math.max(1,attack.length));
+    setTimeout(spawn, 5000/Math.max(1,attack.length*(dif=="hard"?2:1)));
 }
 
 async function blind() {
@@ -297,6 +303,22 @@ async function desplash(a) {
     if (a > 0)
         setTimeout(desplash, 5, a -1);
 }
+
+function cFL(val) {
+    return String(val).charAt(0).toUpperCase() + String(val).slice(1);
+}
+function setMode(s) {
+    if (row > 0)
+        return;
+    if (s == "hard") {
+        poss = "cdefg";
+    } else {
+        poss = "abcdefg";
+    }
+    dif = s;
+    setAnswer();
+    document.getElementById("diff").innerText = "Difficulty : " + cFL(dif);
+}
 async function horse_s() {
     if (over)
         return;
@@ -313,7 +335,7 @@ async function horse_s() {
         horse = ho;
         setTimeout(horse_e, Math.round(Math.random()*400)+1000);
     }else{
-        setTimeout(horse_s, 5000);
+        setTimeout(horse_s, 2000);
     }
 }
 
@@ -333,7 +355,7 @@ async function horse_e() {
         }
         removeHorse();
     }
-    setTimeout(horse_s, Math.round(Math.random()*5000)+10000);
+    setTimeout(horse_s, dif=="hard"? rand(4000,8000): Math.round(Math.random()*5000)+10000);
 }
 
 move();
