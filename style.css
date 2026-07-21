@@ -105,3 +105,13 @@
     display: inline-block;
     position:absolute;
 }
+
+.notif {
+    position: absolute;
+    top: -20px;
+    left: 20px;
+    border: 2px white solid;
+    padding: 5px;
+    border-radius: 10px;
+    background-color: #434343;
+}

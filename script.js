@@ -73,7 +73,7 @@ function unshuffle() {
 
 function submit() {
     if (guess.search(re)==-1) {
-        alert("Guess wrong: Must be horse");
+        notif("Guess wrong: Must be horse");
         return;
     }
     if (row == 0) {
@@ -214,9 +214,9 @@ function endGame(b) {
     }
     projs = [];
     if (b) {
-        alert("You Won!");
+        notif("You Won!");
     } else {
-        alert("You Lost!");
+        notif("You Lost!");
         guess = "";
         setGuess();
     }
@@ -356,6 +356,33 @@ async function horse_e() {
         removeHorse();
     }
     setTimeout(horse_s, dif=="hard"? rand(4000,8000): Math.round(Math.random()*5000)+10000);
+}
+
+function notif(s){
+    let el = document.createElement("div");
+    el.className = "notif";
+    el.innerText = s;
+    el.style.top = "-20px";
+    el.style.left = "20px";
+    document.body.appendChild(el);
+    moveElement(el, 70, true, [moveElement,el,-500,false]);
+}
+
+async function moveElement(e, p, top, after = null) {
+    if (top) {
+        e.style.top = (Number(e.style.top.substring(0, e.style.top.length - 2)) + Math.sign(p))+"px";
+    } else {
+        e.style.left = (Number(e.style.left.substring(0, e.style.left.length - 2)) + Math.sign(p))+"px";
+    }
+    p -= 1 * Math.sign(p);
+    
+    if (p != 0) {
+        setTimeout(moveElement, 5, e, p, top, after);
+    } else if (after != null) {
+        setTimeout(after[0], 2000, ...after.slice(1))
+    } else {
+        e.remove();
+    }
 }
 
 move();
