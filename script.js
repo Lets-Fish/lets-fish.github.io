@@ -220,7 +220,13 @@ function endGame(b) {
         guess = "";
         setGuess();
     }
-    
+    let insert = document.createElement('button');
+    insert.className = "button";
+    insert.onclick = function () {
+        window.location.reload();
+    };
+    insert.innerText = "Play Again";
+    document.getElementById("center-screen").appendChild(insert);
     
 }
 
@@ -270,7 +276,7 @@ function projectile(x,y) {
     insert.className = "projectile";
     insert.style.top = x + "px";
     insert.style.left = y + "px";
-    document.body.appendChild(insert)
+    document.body.appendChild(insert);
     projs.push([insert, 0, 0, dif == "hard" ? (0.99 + Math.random() * 0.01) : 0.995,dif=="hard"?1+Math.random():1]);
 }
 
